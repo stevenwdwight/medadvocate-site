@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Medical Advocate — Finally, Someone In Your Corner</title>
+  <meta name="description" content="Upload a lab report. Get answers in plain English. Walk into your next appointment armed with the right questions. Built for families who deserve to understand what's happening." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080d14;
+      --bg2: #0d1520;
+      --bg3: #111c2b;
+      --gold: #e8a830;
+      --gold-light: #f5c842;
+      --blue: #3b82f6;
+      --green: #22c55e;
+      --text: #f0f4f8;
+      --muted: #8899aa;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,13,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--text); }
+    .nav-cta {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(232,168,48,0.12) 0%, transparent 70%);
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,168,48,0.1);
+      border: 1px solid rgba(232,168,48,0.3);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      max-width: 820px;
+      margin: 0 auto 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-sub strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── WAITLIST FORM ── */
+    .waitlist-form {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      justify-content: center;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
+    .waitlist-form input {
+      flex: 1; min-width: 240px;
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .waitlist-form input:focus { border-color: var(--gold); }
+    .waitlist-form input::placeholder { color: var(--muted); }
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+      font-weight: 800;
+      padding: 16px 32px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,168,48,0.3); }
+
+    .hero-trust {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .hero-trust span { color: var(--green); font-weight: 600; }
+
+    /* ── SCENE ── */
+    .scene {
+      background: var(--bg2);
+      padding: 80px 24px;
+    }
+    .scene-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .scene-label {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .scene h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 32px;
+    }
+    .scene-story {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 12px;
+      padding: 36px 40px;
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.85;
+      color: #c8d8e8;
+      margin-bottom: 32px;
+    }
+    .scene-story p { margin-bottom: 16px; }
+    .scene-story p:last-child { margin-bottom: 0; }
+    .scene-story strong { color: var(--text); }
+    .scene-outcome {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      text-align: center;
+      padding: 60px 24px;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--text);
+    }
+    .divider em { font-style: normal; color: var(--gold); }
+
+    /* ── PROBLEM ── */
+    .problem {
+      padding: 80px 24px;
+      background: var(--bg);
+    }
+    .problem-inner { max-width: 900px; margin: 0 auto; }
+    .problem h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .problem-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 56px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .problem-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .problem-icon { font-size: 2rem; margin-bottom: 16px; }
+    .problem-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .problem-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 100px 24px;
+      background: var(--bg2);
+    }
+    .how-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .section-label {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .how h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .how-sub { color: var(--muted); font-size: 1.1rem; margin-bottom: 64px; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      text-align: left;
+    }
+    .step {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+    }
+    .step-num {
+      width: 44px; height: 44px;
+      background: var(--gold);
+      color: #000;
+      font-weight: 900;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .step p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+
+    /* ── USE CASES ── */
+    .uses {
+      padding: 100px 24px;
+      background: var(--bg);
+    }
+    .uses-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .uses h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .uses-sub { color: var(--muted); font-size: 1.1rem; margin-bottom: 56px; }
+    .uses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      text-align: left;
+    }
+    .use-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .use-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .use-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .use-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+    /* ── LEGAL ── */
+    .legal {
+      padding: 80px 24px;
+      background: var(--bg2);
+    }
+    .legal-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .legal h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+    .legal-box {
+      background: var(--bg3);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: left;
+    }
+    .legal-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media(max-width: 600px) { .legal-cols { grid-template-columns: 1fr; } }
+    .legal-col h3 { font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .legal-col.yes h3 { color: var(--green); }
+    .legal-col.no h3 { color: #ef4444; }
+    .legal-col ul { list-style: none; }
+    .legal-col ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.95rem;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .legal-col ul li:last-child { border-bottom: none; }
+    .legal-col ul li::before { flex-shrink: 0; margin-top: 1px; }
+    .legal-col.yes ul li::before { content: '✓'; color: var(--green); font-weight: 700; }
+    .legal-col.no ul li::before { content: '✗'; color: #ef4444; font-weight: 700; }
+    .legal-tagline {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* ── PRICING ── */
+    .pricing {
+      padding: 100px 24px;
+      background: var(--bg);
+    }
+    .pricing-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .pricing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .pricing-sub { color: var(--muted); font-size: 1.1rem; margin-bottom: 56px; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+    .price-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+    }
+    .price-card.featured {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, rgba(232,168,48,0.08) 0%, var(--bg2) 60%);
+      position: relative;
+    }
+    .featured-badge {
+      position: absolute;
+      top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--gold);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .price-name { font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .price-amount { font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 4px; }
+    .price-amount span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+    .price-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .price-features { list-style: none; }
+    .price-features li {
+      padding: 8px 0;
+      font-size: 0.95rem;
+      color: #c8d8e8;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .price-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .price-features li.dimmed { color: var(--muted); }
+    .price-features li.dimmed::before { content: '—'; color: var(--muted); }
+
+    /* ── FOUNDER ── */
+    .founder {
+      padding: 100px 24px;
+      background: var(--bg2);
+    }
+    .founder-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .founder h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+    }
+    .founder-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: left;
+    }
+    .founder-quote {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #c8d8e8;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .founder-quote strong { color: var(--text); font-style: normal; }
+    .founder-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+    .founder-title { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      padding: 120px 24px;
+      background: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .bottom-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,168,48,0.1) 0%, transparent 70%);
+    }
+    .bottom-cta h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      max-width: 700px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .bottom-cta h2 em { font-style: normal; color: var(--gold); }
+    .bottom-cta p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 500px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 12px;
+      padding: 20px 32px;
+      color: var(--green);
+      font-weight: 600;
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    @media(max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .scene-story { padding: 24px; }
+      .founder-card { padding: 32px 24px; }
+      .legal-box { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Medical<span>Advocate</span></div>
+  <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div style="position:relative; z-index:1; width:100%;">
+    <div class="hero-badge">🩺 Now accepting early access requests</div>
+    <h1>
+      Finally, someone in<br/><em>your corner</em><br/>who understands<br/>what's happening.
+    </h1>
+    <p class="hero-sub">
+      Upload a lab report. Describe your loved one's history.<br/>
+      Get answers in <strong>plain English</strong> — and the exact questions<br/>
+      to ask your doctor. <strong>No medical degree required.</strong>
+    </p>
+
+    <div id="waitlist">
+      <form class="waitlist-form" onsubmit="handleSubmit(event)">
+        <input type="email" placeholder="Enter your email address" required id="email-input" />
+        <button type="submit" class="btn-gold">Get Early Access →</button>
+      </form>
+      <div class="success-msg" id="success-msg">
+        ✓ You're on the list. We'll be in touch soon. Welcome to the corner.
+      </div>
+      <p class="hero-trust"><span>✓ Free to start</span> &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; <span>✓ Join 500+ families</span> on the waitlist</p>
+    </div>
+  </div>
+</section>
+
+<!-- REAL STORY -->
+<section class="scene">
+  <div class="scene-inner">
+    <div class="scene-label">Why We Built This</div>
+    <h2>She was doing everything right.<br/>Nobody told her it wasn't enough.</h2>
+    <div class="scene-story">
+      <p>Sandy's husband Duane — 84 years old, a Navy veteran, two years out from esophageal cancer surgery — had his sodium crash to <strong>124.</strong> The normal range is 136–145. The VA sent a letter. Nursing called about an ER evaluation.</p>
+      <p>Sandy had been following her instructions perfectly. Every two hours, she flushed his feeding tube with 150ml of plain water. Just like she was told. What nobody told her: <strong>plain water dilutes sodium.</strong> She was giving him 1,800ml of sodium-diluting water every single day — on top of the bile he was already losing.</p>
+      <p>When we looked at his labs alongside his full medical history — the surgery, the J-tube formula, the bile loss, his Navy service on a submarine in the 1960s — the picture became clear immediately. His formula wasn't replacing what he was losing. The flush protocol was making it worse. And nobody had ever asked about the asbestos exposure that might explain the fluid in his lungs.</p>
+      <p><strong>Sandy walked into those conversations with five questions she didn't know she needed to ask. Her husband's care changed.</strong></p>
+    </div>
+    <p class="scene-outcome">"She felt like she finally had an advocate."</p>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  "We don't replace your doctor.<br/><em>We replace your confusion.</em>"
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <div class="section-label" style="text-align:center; margin-bottom:16px;">The broken system</div>
+    <h2>The system wasn't built for you.</h2>
+    <p class="problem-sub">It was built for doctors, insurance companies, and hospital administrators. Families got a 7-minute appointment and a stack of paperwork.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">📋</div>
+        <h3>Lab results in a language you don't speak</h3>
+        <p>Numbers, ranges, abbreviations. A letter that says "all looks okay" when clearly something isn't. You deserve to know what it actually means.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">⏱️</div>
+        <h3>7 minutes with a doctor who doesn't know your story</h3>
+        <p>Doctors are brilliant but rushed. They don't know about the surgery from 3 years ago, the Navy service, the medications from another specialist. Context gets lost.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">💊</div>
+        <h3>Nobody checks if your medications work against each other</h3>
+        <p>The average American over 65 takes 4–5 prescriptions. Many take 10 or more. Pharmacists catch some interactions. Doctors assume someone else checked.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">😰</div>
+        <h3>Fear fills the gap where information should be</h3>
+        <p>When you don't understand what's happening to someone you love, your mind fills the silence with worst-case scenarios. Knowledge is the antidote to fear.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🚫</div>
+        <h3>Your rights get ignored</h3>
+        <p>"We can't release records until discharge." That's illegal. Under federal law, patients have the right to their records at any time. Most families don't know that.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🔗</div>
+        <h3>Nobody connects the dots</h3>
+        <p>A lab result means something different depending on who the patient is, what surgeries they've had, what they take, what they've been exposed to. One number isn't the story.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <div class="section-label">How it works</div>
+    <h2>Three steps to clarity.</h2>
+    <p class="how-sub">No medical degree. No jargon. Just answers.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Tell us their story</h3>
+        <p>Build a simple profile — their age, medical history, surgeries, current medications, and what's happening right now. Their backstory is what makes everything else make sense.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Upload the report</h3>
+        <p>Take a photo of any lab report, MRI result, imaging report, or discharge summary. We read it the same way you would — but we understand it in context of their full history.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Walk in prepared</h3>
+        <p>Get a plain English explanation of every result, plus the exact questions to ask your doctor at your next appointment. Go from confused to confident in minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="uses">
+  <div class="uses-inner">
+    <div class="section-label">What you can use it for</div>
+    <h2>More than just lab reports.</h2>
+    <p class="uses-sub">Your health questions don't fit in one category. Neither do we.</p>
+    <div class="uses-grid">
+      <div class="use-item">
+        <div class="use-icon">🔬</div>
+        <div>
+          <h3>Lab report interpretation</h3>
+          <p>Every number, every flag, every trend — explained in plain English in context of who this person actually is.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">🫁</div>
+        <div>
+          <h3>MRI & imaging reports</h3>
+          <p>"Moderate disc herniation at L4-L5" — what does that actually mean for your life? We tell you.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">💊</div>
+        <div>
+          <h3>Medication interaction checks</h3>
+          <p>Enter every medication and supplement. Find out if anything is working against anything else — before it becomes a problem.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">🌿</div>
+        <div>
+          <h3>Vitamins & supplement stacking</h3>
+          <p>Are your 12 supplements working together or against each other? Some combinations help. Some cancel out. Know the difference.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">🥗</div>
+        <div>
+          <h3>Diet guidance in your context</h3>
+          <p>What should you eat given your labs, your medications, and your specific situation? Personalized — not generic advice.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">🩺</div>
+        <div>
+          <h3>Pre-appointment prep</h3>
+          <p>Seeing a cardiologist Tuesday? We help you walk in with the right questions so you use every one of those 7 minutes wisely.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">⚖️</div>
+        <div>
+          <h3>Know your patient rights</h3>
+          <p>Hospitals sometimes say no when the law says yes. We tell you what you're entitled to — and exactly how to ask for it.</p>
+        </div>
+      </div>
+      <div class="use-item">
+        <div class="use-icon">🔍</div>
+        <div>
+          <h3>Second opinion prep</h3>
+          <p>Organize everything clearly before seeing a specialist. Walk in as an informed partner in your care, not a passive patient.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL CLARITY -->
+<section class="legal">
+  <div class="legal-inner">
+    <div class="section-label" style="margin-bottom:16px;">Legal & safe</div>
+    <h2>We're crystal clear about<br/>what we are.</h2>
+    <div class="legal-box">
+      <div class="legal-cols">
+        <div class="legal-col yes">
+          <h3>✓ What we do</h3>
+          <ul>
+            <li>Explain what medical records mean in plain English</li>
+            <li>Help you generate the right questions to ask</li>
+            <li>Provide general medical education and information</li>
+            <li>Help you understand your rights as a patient</li>
+            <li>Suggest what specialists might be relevant</li>
+            <li>Help organize and track medical information</li>
+          </ul>
+        </div>
+        <div class="legal-col no">
+          <h3>✗ What we don't do</h3>
+          <ul>
+            <li>Diagnose any condition</li>
+            <li>Prescribe or recommend treatments</li>
+            <li>Practice medicine in any form</li>
+            <li>Guarantee outcomes</li>
+            <li>Replace your doctor or medical team</li>
+          </ul>
+        </div>
+      </div>
+      <p class="legal-tagline">"We don't replace your doctor. We replace your confusion."</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-inner">
+    <div class="section-label">Pricing</div>
+    <h2>Simple. Honest. Affordable.</h2>
+    <p class="pricing-sub">Start free. Upgrade when you're ready. Cancel anytime. No games.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount">$0</div>
+        <div class="price-desc">Try it with no commitment. See the difference it makes.</div>
+        <ul class="price-features">
+          <li>1 report analysis per month</li>
+          <li>Plain English explanation</li>
+          <li>Patient profile builder</li>
+          <li class="dimmed">Question generator</li>
+          <li class="dimmed">Medication interactions</li>
+          <li class="dimmed">Unlimited reports</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">MOST POPULAR</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount">$19<span>/month</span></div>
+        <div class="price-desc">For families actively navigating the healthcare system.</div>
+        <ul class="price-features">
+          <li>Unlimited report uploads</li>
+          <li>Plain English explanations</li>
+          <li>5 questions per report for your doctor</li>
+          <li>Medication interaction checker</li>
+          <li>Supplement stacking review</li>
+          <li>Full report history & tracking</li>
+          <li>Patient rights guidance</li>
+          <li>Cancel anytime</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Crisis Plan</div>
+        <div class="price-amount">$39<span> one-time</span></div>
+        <div class="price-desc">For families in the middle of it. 90 days. No auto-renew. Ever.</div>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>90 days of full access</li>
+          <li>No subscription, no auto-renewal</li>
+          <li>No guilt when it's over</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="founder-inner">
+    <div class="section-label" style="margin-bottom:16px;">From the founder</div>
+    <h2>I built this because<br/>I needed it.</h2>
+    <div class="founder-card">
+      <p class="founder-quote">
+        "I'm a baby boomer. I've sat in those waiting rooms. I've held those lab reports and pretended I understood what they meant. I've watched family members nod along to explanations they didn't follow — too afraid to say they were lost.
+        <br/><br/>
+        We built this for Sandy — who was doing everything right, following every instruction, and had no idea her husband's sodium was crashing because of something completely fixable. We built it for Linda, who couldn't get her husband's records because the hospital said no — and didn't know that was illegal.
+        <br/><br/>
+        <strong>The system isn't broken because doctors are bad. It's broken because families don't have someone in their corner who speaks both languages — medical and human.</strong>
+        <br/><br/>
+        That's what this is. Your advocate. In your pocket."
+      </p>
+      <div class="founder-name">Steven Dwight</div>
+      <div class="founder-title">Founder · Baby Boomer · 30 years in B2B sales · Roseburg, Oregon</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>Your loved one deserves someone<br/>who understands <em>what's happening.</em></h2>
+  <p>Join thousands of families who are done feeling lost in the system.</p>
+  <form class="waitlist-form" style="justify-content:center; position:relative;" onsubmit="handleSubmit(event)">
+    <input type="email" placeholder="Enter your email address" required id="email-input-2" />
+    <button type="submit" class="btn-gold">Join the Waitlist →</button>
+  </form>
+  <div class="success-msg" id="success-msg-2" style="margin-top:16px;">
+    ✓ You're on the list. We'll be in touch soon. Welcome to the corner.
+  </div>
+  <p class="hero-trust" style="margin-top:16px; position:relative;"><span>✓ Free to start</span> &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; <span>✓ Cancel anytime</span></p>
+</section>
+
+<footer>
+  <p>© 2026 MedicalAdvocate · Not a medical provider · Educational and informational use only<br/>
+  <a href="#" style="color:var(--muted); text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="#" style="color:var(--muted); text-decoration:none;">Terms of Service</a></p>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.querySelector('input[type=email]').value;
+
+    fetch('https://clawbdr-forms.onrender.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        source: 'medadvocate-waitlist',
+        name: ''
+      })
+    }).catch(() => {});
+
+    form.style.display = 'none';
+    const successId = form.closest('section').id === 'waitlist' ? 'success-msg' : 'success-msg-2';
+    document.getElementById('success-msg').style.display = 'block';
+    document.getElementById('success-msg-2').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
